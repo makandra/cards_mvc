@@ -1,0 +1,13 @@
+%form(ng-submit='ctrl.save()')
+  .form-group
+    %label
+      Title
+    %input.form-control(type='text' ng-model='ctrl.card.title')
+
+  .form-group
+    %label
+      Body
+    %textarea.form-control(ng-model='ctrl.card.body')
+
+  %button.btn.btn-primary(type='submit')
+    {{ ctrl.card.id ? "Update" : "Create" }}

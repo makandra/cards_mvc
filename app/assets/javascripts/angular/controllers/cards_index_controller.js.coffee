@@ -1,0 +1,2 @@
+@CardsMvc.controller 'CardsIndexController', [ ->
+]
