@@ -7,14 +7,10 @@
   else
     card = new Card()
 
-  save = ->
-    save = if cardId
-      card.$update
-    else
-      card.$save
+  save = (form) ->
+    card.save(form).then ->
+      $location.path("/cards")
 
-    save().then ->
-      $location.path("/cards/#{card.id}/edit")
 
 
   card: card, save: save

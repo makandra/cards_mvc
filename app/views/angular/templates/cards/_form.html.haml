@@ -1,13 +1,13 @@
-%form(ng-submit='ctrl.save()')
-  .form-group
-    %label
+%form(name='cardForm' ng-submit='ctrl.save(cardForm)')
+  .form-group(errors-for='title')
+    %label.control-label
       Title
-    %input.form-control(type='text' ng-model='ctrl.card.title')
+    %input.form-control(type='text' name='title' ng-model='ctrl.card.title')
 
-  .form-group
-    %label
+  .form-group(errors-for='body')
+    %label.control-label
       Body
-    %textarea.form-control(ng-model='ctrl.card.body')
+    %textarea.form-control(name='body' ng-model='ctrl.card.body')
 
   %button.btn.btn-primary(type='submit')
     {{ ctrl.card.id ? "Update" : "Create" }}

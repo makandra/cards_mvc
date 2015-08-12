@@ -1,1 +1,1 @@
-json.(@card, :id, :title, :body)
+json.partial! 'show', card: @card
