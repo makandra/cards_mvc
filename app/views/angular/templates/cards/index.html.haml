@@ -1,13 +1,26 @@
-%h1
-  Cards
+.row
+  %h1
+    .pull-right
+      %a.btn.btn-default(ng-href='#/cards/new')
+        New card
+    Cards
 
 %p
-  %a.btn.btn-default(ng-href='#/cards/new')
-    New card
+
+.row
+  %form
+    .form-group
+      %input.form-control(type='search' placeholder='Search…' ng-model='ctrl.searchQuery' ng-change='ctrl.search(ctrl.searchQuery)')
 
 
 %p
-  %table.table
+
+.row
+  .text-center(ng-show='ctrl.loading')
+    %i.material-icons.spin
+      cached
+
+  %table.table(ng-hide='ctrl.loading')
     %tr(ng-repeat='card in ctrl.cards')
       %td
         %a(ng-href='#/cards/{{ card.id }}/edit') {{ card.title }}
