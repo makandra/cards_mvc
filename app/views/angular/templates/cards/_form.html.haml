@@ -7,7 +7,7 @@
   .form-group(errors-for='body')
     %label.control-label
       Body
-    %textarea.form-control(name='body' ng-model='ctrl.card.body')
+    %ckeditor(name='body' ng-model='ctrl.card.body')
 
   %button.btn.btn-primary(type='submit')
     {{ ctrl.card.id ? "Update" : "Create" }}
