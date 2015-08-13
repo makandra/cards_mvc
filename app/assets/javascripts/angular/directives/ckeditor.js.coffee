@@ -12,12 +12,12 @@ uuid = 0
     editor = null
     editorReady = $q (resolve) ->
       $timeout ->
-        editor = CKEDITOR.replace(scope.uid)
-        editor.on 'change', ->
+        newEditor = CKEDITOR.replace(scope.uid)
+        newEditor.setData '', ->
+          editor = newEditor
+          resolve()
+        newEditor.on 'change', ->
           ngModel.$setViewValue(editor.getData())
-        editor.on 'loaded', ->
-          $timeout ->
-            resolve()
 
     ngModel.$render = ->
       if ngModel.$viewValue
@@ -26,7 +26,6 @@ uuid = 0
 
 
     scope.$on '$destroy', ->
-      editorReady.then ->
-        editor
+      newEditor?.destroy()
 
 ]
