@@ -24,3 +24,5 @@
     %tr(ng-repeat='card in ctrl.cards')
       %td
         %a(ng-href='#/cards/{{ card.id }}/edit') {{ card.title }}
+
+  %pagination(info='ctrl.cards.$metadata.pagination' go-to='ctrl.goToPage(page)' ng-hide='ctrl.loading')

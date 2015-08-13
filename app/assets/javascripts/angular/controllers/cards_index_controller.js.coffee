@@ -1,30 +1,35 @@
-@CardsMvc.controller 'CardsIndexController', [ '$timeout', 'Card', ($timeout, Card) ->
+@CardsMvc.controller 'CardsIndexController', [ '$scope', '$location', '$timeout', 'Card', ($scope, $location, $timeout, Card) ->
 
-  controller =
-    searchQuery: ''
+  controller = {}
 
   scheduledSearch = null
 
-  fetchResults = (query) ->
+  updateIndex = ->
     controller.loading = true
-    Card.query(query: query).$promise.then (result) ->
-      controller.cards = result
+    { query, page } = $location.search()
+    controller.searchQuery = query
+    controller.cards = Card.$search(query: query, page: page).$then ->
       controller.loading = false
 
-
-  scheduleSearch = (query) ->
+  controller.search = (query) ->
     controller.loading = true
     $timeout.cancel(scheduledSearch) if scheduledSearch?
     scheduledSearch = $timeout ->
       scheduledSearch = null
-      fetchResults(query)
+      if query == ''
+        $location.search({})
+      else
+        $location.search(query: query)
     , 200
 
-  controller.search = (query) ->
-    scheduleSearch(query)
+  controller.goToPage = (page) ->
+    $location.search(page: page, query: $location.search().query)
 
 
-  fetchResults()
+  $scope.$on '$routeUpdate', ->
+    updateIndex()
+
+  updateIndex()
 
   controller
 ]

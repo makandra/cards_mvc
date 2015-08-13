@@ -40,7 +40,12 @@ class Api::CardsController < ApplicationController
   end
 
   def load_cards
-    @cards = Card.search(params[:query]).order(created_at: :desc).all
+    @cards = Card.
+      search(params[:query]).
+      order(created_at: :desc).
+      paginate(page: params[:page]).
+      per_page(10).
+      all
   end
 
   def build_card

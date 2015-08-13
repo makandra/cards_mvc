@@ -3,12 +3,12 @@
   cardId = $routeParams.id
 
   if cardId
-    card = Card.get(id: cardId)
+    card = Card.$find(cardId).$then (result) ->
   else
-    card = new Card()
+    card = Card.$build()
 
   save = (form) ->
-    card.save(form).then ->
+    card.saveForm(form).$then ->
       $location.path("/cards")
 
 
