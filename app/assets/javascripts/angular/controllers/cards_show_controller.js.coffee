@@ -4,7 +4,9 @@
 
   cardId = $routeParams.id
   controller.card = Card.$find(cardId).$then (result) ->
-    controller.body = $sce.trustAsHtml(controller.card.body)
+    controller.card.body = $sce.trustAsHtml(controller.card.body)
+    for page in controller.card.extra_pages
+      page.body = $sce.trustAsHtml(page.body)
 
   controller
 ]

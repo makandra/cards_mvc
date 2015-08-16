@@ -5,9 +5,13 @@
     %input.form-control(type='text' name='title' ng-model='ctrl.card.title')
 
   .form-group(errors-for='body')
-    %label.control-label
-      Body
-    %ckeditor(name='body' ng-model='ctrl.card.body')
+    %tabs
+      %tab(title='1')
+        %ckeditor(name='body' ng-model='ctrl.card.body')
+      %tab(ng-repeat='extraPage in ctrl.card.extra_pages' title='{{$index + 2}}')
+        %ckeditor(name='extraPage.title' ng-model='extraPage.body')
+        %a.btn.btn-warn(ng-click='ctrl.removePage(extraPage)') Remove page
+      %tab(title='+' ng-activate='ctrl.addPage()')
 
   %button.btn.btn-primary(type='submit')
     {{ ctrl.card.id ? "Update" : "Create" }}

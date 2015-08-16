@@ -4,4 +4,8 @@
       Edit
   {{ ctrl.card.title }}
 
-.body(ng-bind-html='ctrl.body')
+%tabs
+  %tab(title='1')
+    .body(ng-bind-html='ctrl.card.body')
+  %tab(ng-repeat='page in ctrl.card.extra_pages' title='{{ $index + 2 }}')
+    .body(ng-bind-html='page.body')

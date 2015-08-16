@@ -1,5 +1,7 @@
 class Card < ActiveRecord::Base
 
+  serialize :extra_pages
+
   validates :title, :body, presence: true
 
 

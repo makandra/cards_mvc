@@ -7,7 +7,7 @@
   if cardId
     controller.card = Card.$find(cardId)
   else
-    controller.card = Card.$build()
+    controller.card = Card.$build(extra_pages: [])
 
   controller.save = (form) ->
     controller.card.saveForm(form).$then ->
@@ -22,6 +22,19 @@
       controller.card.$destroy().$then ->
         $location.path("/cards")
         Flash.success('Card deleted')
+
+
+  controller.addPage = ->
+    controller.card.extra_pages ?= []
+    controller.card.extra_pages.push
+      body: null
+    false
+
+  controller.removePage = (page) ->
+    index = controller.card.extra_pages.indexOf(page)
+    console.log index
+    if index >= 0
+      controller.card.extra_pages[index..index] = []
 
 
   controller

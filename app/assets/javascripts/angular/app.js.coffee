@@ -1,3 +1,4 @@
+#= require jquery2
 #= require angular
 #= require angular-route
 #= require angular-restmod-bundle
