@@ -1,21 +1,23 @@
 @CardsMvc.controller 'CardsFormController', ['$routeParams', '$location', 'Card', ($routeParams, $location, Card) ->
 
+  controller = {}
+
   cardId = $routeParams.id
 
   if cardId
-    card = Card.$find(cardId).$then (result) ->
+    controller.card = Card.$find(cardId)
   else
-    card = Card.$build()
+    controller.card = Card.$build()
 
-  save = (form) ->
-    card.saveForm(form).$then ->
+  controller.save = (form) ->
+    controller.card.saveForm(form).$then ->
       $location.path("/cards")
 
-  destroy = ->
+  controller.destroy = ->
     if confirm("Delete card?")
-      card.$destroy().$then ->
+      controller.card.$destroy().$then ->
         $location.path("/cards")
 
 
-  card: card, save: save, destroy: destroy
+  controller
 ]

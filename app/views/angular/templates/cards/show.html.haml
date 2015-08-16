@@ -1,0 +1,7 @@
+%h1
+  .pull-right
+    %a.btn.btn-default(ng-href='#/cards/{{ctrl.card.id}}/edit')
+      Edit
+  {{ ctrl.card.title }}
+
+.body(ng-bind-html='ctrl.body')

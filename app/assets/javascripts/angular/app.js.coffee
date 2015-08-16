@@ -22,6 +22,10 @@
       templateUrl: 'angular/cards/new.html'
       controller: 'CardsFormController'
       controllerAs: 'ctrl'
+    .when '/cards/:id',
+      templateUrl: 'angular/cards/show.html'
+      controller: 'CardsShowController'
+      controllerAs: 'ctrl'
     .when '/cards/:id/edit',
       templateUrl: 'angular/cards/edit.html'
       controller: 'CardsFormController'
