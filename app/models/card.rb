@@ -12,7 +12,7 @@ class Card < ActiveRecord::Base
   end
 
   def self.seed
-    50.times do |i|
+    50.downto(1) do |i|
       Card.create(title: "Card #{i}", body: "Foo bar baz")
     end
   end
