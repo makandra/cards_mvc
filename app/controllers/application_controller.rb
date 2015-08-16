@@ -8,4 +8,9 @@ class ApplicationController < ActionController::Base
     cookies['CSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
   end
 
+
+  helper_method def signed_in
+    !!session[:signed_in]
+  end
+
 end

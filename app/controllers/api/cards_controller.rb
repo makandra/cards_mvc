@@ -2,6 +2,8 @@ class Api::CardsController < ApplicationController
 
   include ApiActions
 
+  before_filter :require_sign_in, only: [:create, :update, :destroy]
+
 
   def show
     load_card
@@ -57,6 +59,12 @@ class Api::CardsController < ApplicationController
   def build_card
     @card ||= Card.new
     @card.attributes = params[:card].permit(:title, :body)
+  end
+
+  def require_sign_in
+    unless signed_in
+      render nothing: true, status: :unauthorized
+    end
   end
 
 

@@ -1,4 +1,4 @@
-%body(ng-app='cards-mvc')
+%body(ng-app='cards-mvc' ng-controller='SessionController as sessionCtrl')
   %nav.navbar.navbar-inverse.navbar-fixed-top
     .container
       .navbar-header
@@ -11,8 +11,17 @@
           %li
             %a(href='#/about')
               About
+        %ul.nav.navbar-nav.navbar-right
+          %li.active
+            %a(href ng-click='sessionCtrl.signIn()' ng-hide='sessionCtrl.signedIn')
+              Sign in
+            %a(href ng-click='sessionCtrl.signOut()' ng-show='sessionCtrl.signedIn')
+              Sign out
 
   .container
     %ng-view
 
   = javascript_include_tag 'angular/app'
+  :coffee
+    @CardsMvc.run (Session) ->
+      Session.set(#{signed_in})

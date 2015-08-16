@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
     resources :cards
 
+    resource :session, only: [:create, :destroy]
+
   end
 
   namespace :angular do
