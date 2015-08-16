@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: 'json' } do
 
-    resources :cards, only: [:index, :show, :create, :update]
+    resources :cards
 
   end
 

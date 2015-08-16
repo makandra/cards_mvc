@@ -11,7 +11,11 @@
     card.saveForm(form).$then ->
       $location.path("/cards")
 
+  destroy = ->
+    if confirm("Delete card?")
+      card.$destroy().$then ->
+        $location.path("/cards")
 
 
-  card: card, save: save
+  card: card, save: save, destroy: destroy
 ]

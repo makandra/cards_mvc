@@ -32,6 +32,12 @@ class Api::CardsController < ApplicationController
     end
   end
 
+  def destroy
+    load_card
+    @card.destroy!
+    render nothing: true
+  end
+
 
   private
 
