@@ -11,4 +11,10 @@ class Card < ActiveRecord::Base
     end
   end
 
+  def self.seed
+    50.times do |i|
+      Card.create(title: "Card #{i}", body: "Foo bar baz")
+    end
+  end
+
 end
