@@ -1,4 +1,4 @@
-@CardsMvc.controller 'CardsFormController', ['$routeParams', '$location', 'Card', ($routeParams, $location, Card) ->
+@CardsMvc.controller 'CardsFormController', ['$routeParams', '$location', 'Card', 'Flash', ($routeParams, $location, Card, Flash) ->
 
   controller = {}
 
@@ -12,11 +12,16 @@
   controller.save = (form) ->
     controller.card.saveForm(form).$then ->
       $location.path("/cards")
+      if cardId
+        Flash.success('Card updated')
+      else
+        Flash.success('Card created')
 
   controller.destroy = ->
     if confirm("Delete card?")
       controller.card.$destroy().$then ->
         $location.path("/cards")
+        Flash.success('Card deleted')
 
 
   controller

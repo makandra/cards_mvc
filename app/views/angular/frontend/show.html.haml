@@ -18,6 +18,13 @@
             %a(href ng-click='sessionCtrl.signOut()' ng-show='sessionCtrl.signedIn')
               Sign out
 
+  .container(ng-controller='FlashesController as flashesCtrl')
+    .flashes
+      .row(ng-repeat='flash in flashesCtrl.flashes')
+        .alert(class='alert-{{flash.severity}}')
+          {{ flash.message }}
+
+
   .container
     %ng-view
 
