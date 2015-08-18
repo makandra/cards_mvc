@@ -12,7 +12,8 @@
             %a(href='#/about')
               About
         %ul.nav.navbar-nav.navbar-right
-          %li.active
+          = render 'shared/switch_framework_dropdown'
+          %li
             %a(href ng-click='sessionCtrl.signIn()' ng-hide='sessionCtrl.signedIn')
               Sign in
             %a(href ng-click='sessionCtrl.signOut()' ng-show='sessionCtrl.signedIn')
