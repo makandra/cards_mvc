@@ -1,6 +1,6 @@
 .row
   %h1
-    .pull-right
+    .pull-right(ng-show='sessionCtrl.signedIn')
       %a.btn.btn-default(ng-href='#/cards/new')
         New card
     Cards
