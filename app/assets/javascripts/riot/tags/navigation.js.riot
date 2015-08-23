@@ -1,0 +1,44 @@
+<navigation>
+  <nav class='navbar navbar-inverse navbar-fixed-top'>
+    <div class='container'>
+      <div class='navbar-header'>
+        <a class='navbar-brand' href='#'>Riot</a>
+      </div>
+      <div class='navbar-collapse'>
+        <ul class='nav navbar-nav'>
+          <li class={ active: section == 'cards' }>
+            <a href='#cards'>
+              Cards
+            </a>
+          </li>
+          <li class={ active: section == 'about' }>
+            <a href='#about'>
+              About
+            </a>
+          </li>
+        </ul>
+        <ul class='nav navbar-nav navbar-right'>
+          <yield></yield>
+          <li>
+            <a>
+              Sign in
+            </a>
+            <a class='hidden'>
+              Sign out
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <script type='coffee'>
+    @on 'mount', =>
+      opts.router.on 'route', (section) =>
+        @section = section
+        @update()
+
+    @off 'mount', =>
+      opts.router.off 'route'
+  </script>
+</navigation>

@@ -10,5 +10,7 @@
 
 @app.apiClient = new $.RestClient('/api/')
 
-$ ->
-  riot.mount('cards')
+$ =>
+  riot.mount('outlet', router: @app.router)
+  riot.mount('navigation', router: @app.router)
+  @app.router.start()
