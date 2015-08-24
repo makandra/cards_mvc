@@ -19,7 +19,7 @@ routeChangeHandler = (params...) ->
     [tag, options] = route
     options ?= {}
     router.trigger 'route', tag, options
-  else if opts.routes.otherwise?
+  else if routes.otherwise?
     riot.route(routes.otherwise)
 
 
