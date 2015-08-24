@@ -1,0 +1,82 @@
+<cards>
+  <div class='row'>
+    <h1>
+      <div class='pull-right'>
+        <a class='btn btn-default' href='#/cards/new'>New card</a>
+      </div>
+      Cards
+    </h1>
+  </div>
+
+  <p></p>
+
+  <div class='row'>
+    <form>
+      <div class='form-group'>
+        <input class='form-control' type='search' placeholder='Search…' name='searchInput' oninput={ search } />
+      </div>
+    </form>
+  </div>
+
+  <p></p>
+
+  <div class='row'>
+    <div class='text-center' if={ loading }>
+      <i class='material-icons spin'>cached</i>
+    </div>
+  </div>
+
+  <div class='row'>
+    <table class="table">
+      <tr each={ cards }>
+        <td>
+          <a href="#/cards/{ id }">
+            { title }
+          </a>
+        </td>
+        <td class='text-right'>
+          <a class='btn btn-default' href='#/cards/{ id }/edit'>Edit</a>
+        </td>
+      <tr>
+    </table>
+  </div>
+
+  <pagination info={ cards.metadata.pagination } go_to={ goTo }>
+  </pagination>
+
+  <script type="coffee">
+    app = window.app
+
+    scheduledSearch = null
+    query = ''
+    page = 1
+    @searchInput.value = query
+
+    updateIndex = =>
+      @loading = true
+      cards = @cards = []
+      params = {}
+      params.query = query if query != ''
+      params.page = page if page > 1
+      app.Card.search(params).done (results) =>
+        $.extend(cards, results)
+        @loading = false
+        @update()
+
+    @search = =>
+      @cards = []
+      @loading = true
+      clearTimeout(scheduledSearch) if scheduledSearch?
+      scheduledSearch = setTimeout =>
+        query = @searchInput.value
+        updateIndex()
+      , 200
+
+    @goTo = (newPage) =>
+      page = newPage
+      updateIndex()
+
+    updateIndex()
+
+  </script>
+</cards>
