@@ -13,6 +13,7 @@ routes = (collection, id, action) ->
 
 routes.otherwise = 'cards'
 
+
 routeChangeHandler = (params...) ->
   route = routes(params...)
   if route?
