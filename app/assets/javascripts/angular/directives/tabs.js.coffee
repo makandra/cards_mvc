@@ -31,7 +31,6 @@
       tab
 
     controller.unregisterTab = (tab) ->
-      console.log("unregister")
       index = controller.tabs.indexOf(tab)
       if index >= 0
         controller.tabs[index..index] = []

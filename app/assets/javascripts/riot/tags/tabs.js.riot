@@ -1,0 +1,37 @@
+<tabs>
+  <ul class='nav nav-tabs'>
+    <li each={ tabs } class={ active: active }>
+      <a href onclick={ parent.activate }>{ title }</a>
+    </li>
+  </ul>
+  <div each={ [parent] } class='tab-content'>
+    <yield />
+  </div>
+
+  <script type="coffee">
+    @tabs = []
+
+    @activate = (event) =>
+      for tab in @tabs
+        tab.active = false
+      event.item.active = true
+      @update()
+      false
+
+    @registerTab = (index) =>
+      newTab = {}
+      if index == -1
+        index = @tabs.length
+      @tabs[index..(index-1)] = [newTab]
+      if @tabs.length == 1
+        newTab.active = true
+      newTab
+
+    @unregisterTab = (tab) =>
+      index = @tabs.indexOf(tab)
+      if index >= 0
+        @tabs[index..index] = []
+      @update()
+
+  </script>
+</tabs>

@@ -22,7 +22,7 @@
     app.Card.find(opts.id).then (card) =>
       @card = card
       for page, index in card.extra_pages
-        page.title = "#{index + 1}"
+        page.title = "#{index + 2}"
       @update()
   </script>
 </card>

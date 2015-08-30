@@ -1,0 +1,28 @@
+<tab>
+  <div class='tab-pane' if={ tab.active }>
+    <div each={ [parent] }>
+      <yield />
+    </div>
+  </div>
+
+  <script type="coffee">
+    tabsTag = @parent
+
+    updateTitle = =>
+      if @tab
+        @tab.title = opts.title
+        tabsTag.update()
+
+    @on 'mount', =>
+      index = $(@root).closest('tabs').find('tab').index(@root)
+      @tab = tabsTag.registerTab(index)
+      updateTitle()
+
+    @on 'unmount', =>
+      tabsTag.unregisterTab(@tab)
+
+    @on 'update', =>
+      updateTitle()
+
+  </script>
+</tab>
