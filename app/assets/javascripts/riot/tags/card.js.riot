@@ -1,0 +1,28 @@
+<card>
+  <h1>
+    <div class='pull-right'>
+      <a class='btn btn-default' ng-href='#cards/{card.id}/edit'>
+        Edit
+      </a>
+    </div>
+    { card.title }
+  </h1>
+  <tabs>
+    <tab title='1'>
+      <raw class='body' content={ card.body }></raw>
+    </tab>
+    <tab each={card.extra_pages} title={ title }>
+      <raw class='body' content={ body }></raw>
+    </tab>
+  </tabs>
+
+  <script type="coffee">
+    app = window.app
+
+    app.Card.find(opts.id).then (card) =>
+      @card = card
+      for page, index in card.extra_pages
+        page.title = "#{index + 1}"
+      @update()
+  </script>
+</card>

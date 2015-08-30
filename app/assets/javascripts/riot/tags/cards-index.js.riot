@@ -1,4 +1,4 @@
-<cards>
+<cards-index>
   <div class='row'>
     <h1>
       <div class='pull-right'>
@@ -30,12 +30,12 @@
     <table class="table">
       <tr each={ cards }>
         <td>
-          <a href="#/cards/{ id }">
+          <a href="#cards/{ id }">
             { title }
           </a>
         </td>
         <td class='text-right'>
-          <a class='btn btn-default' href='#/cards/{ id }/edit'>Edit</a>
+          <a class='btn btn-default' href='#cards/{ id }/edit'>Edit</a>
         </td>
       <tr>
     </table>
@@ -79,4 +79,4 @@
     updateIndex()
 
   </script>
-</cards>
+</cards-index>

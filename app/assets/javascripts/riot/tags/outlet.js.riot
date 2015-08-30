@@ -4,18 +4,18 @@
     currentTags = []
 
     mount = (tag, options) =>
+      $root = $(@root)
+
       currentTag.unmount() for currentTag in currentTags
-      @$root.empty()
+      $root.empty()
 
       newTag = $("<#{tag}/>")
-      @$root.append(newTag)
+      $root.append(newTag)
       currentTags = riot.mount(newTag, options)
-
-    @on 'mount', =>
-      @$root = $(@root)
-      opts.router.on 'route', mount
 
     @on 'unmount', =>
       opts.router.off 'route', mount
+
+    opts.router.on 'route', mount
   </script>
 </outlet>

@@ -7,7 +7,9 @@ routes = (collection, id, action) ->
 
   switch route.join('/')
     when 'cards'
-      ['cards']
+      ['cards-index']
+    when 'cards/:id'
+      ['card', id: id]
     when 'about'
       ['about']
 

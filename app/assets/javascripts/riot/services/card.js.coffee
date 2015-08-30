@@ -12,3 +12,6 @@ class @app.Card
       cards.metadata = data.meta
       cards
 
+  @find: (id) ->
+    client.read(id).then (data) ->
+      new Card(data.card)
