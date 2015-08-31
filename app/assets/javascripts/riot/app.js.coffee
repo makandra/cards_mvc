@@ -1,5 +1,6 @@
 #= require jquery2
 #= require jquery.rest
+#= require lodash
 #= require riot
 #= require_self
 #= require_tree ./services

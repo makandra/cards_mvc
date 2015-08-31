@@ -1,28 +1,17 @@
 <tab>
-  <div class='tab-pane' if={ tab.active }>
-    <div each={ [parent] }>
-      <yield />
-    </div>
+  <div tab class='tab-pane' if={ active }>
+    <yield />
   </div>
 
   <script type="coffee">
-    tabsTag = @parent
+    tabsTag = opts.tabs || @parent
 
-    updateTitle = =>
-      if @tab
-        @tab.title = opts.title
-        tabsTag.update()
+    @title = opts.title
 
-    @on 'mount', =>
-      index = $(@root).closest('tabs').find('tab').index(@root)
-      @tab = tabsTag.registerTab(index)
-      updateTitle()
+    tabsTag.registerTab(@)
 
     @on 'unmount', =>
-      tabsTag.unregisterTab(@tab)
-
-    @on 'update', =>
-      updateTitle()
+      tabsTag.unregisterTab(@)
 
   </script>
 </tab>

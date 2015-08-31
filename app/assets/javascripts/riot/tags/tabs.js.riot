@@ -1,15 +1,34 @@
 <tabs>
-  <ul class='nav nav-tabs'>
-    <li each={ tabs } class={ active: active }>
-      <a href onclick={ parent.activate }>{ title }</a>
-    </li>
-  </ul>
-  <div each={ [parent] } class='tab-content'>
-    <yield />
+  <div>
+    <tab-navigation tabs={ tabs }>
+    </tab-navigation>
+    <div class='tab-content'>
+      <yield />
+    </div>
   </div>
 
   <script type="coffee">
     @tabs = []
+
+    @registerTab = (tab) =>
+      if @tabs.length == 0
+        tab.active = true
+      if @tabs.indexOf(tab) == -1
+        @tabs.push(tab)
+      updateNavigation()
+
+    @unregisterTabs = (tab) =>
+      index = @tabs.indexOf(tab)
+      if index >= 0
+        @tabs[index..index] == []
+      updateNavigation()
+
+    updateNavigation = =>
+      setTimeout =>
+        $root = $(@root)
+        @tabs = _.sortBy @tabs, (tab) =>
+          $root.find('tab').index(tab.root)
+        @tags['tab-navigation'].update(tabs: @tabs)
 
     @activate = (event) =>
       for tab in @tabs
@@ -17,21 +36,6 @@
       event.item.active = true
       @update()
       false
-
-    @registerTab = (index) =>
-      newTab = {}
-      if index == -1
-        index = @tabs.length
-      @tabs[index..(index-1)] = [newTab]
-      if @tabs.length == 1
-        newTab.active = true
-      newTab
-
-    @unregisterTab = (tab) =>
-      index = @tabs.indexOf(tab)
-      if index >= 0
-        @tabs[index..index] = []
-      @update()
 
   </script>
 </tabs>

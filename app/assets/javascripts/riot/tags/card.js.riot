@@ -9,9 +9,9 @@
   </h1>
   <tabs>
     <tab title='1'>
-      <raw class='body' content={ card.body }></raw>
+      <raw class='body' content={ parent.parent.card.body }></raw>
     </tab>
-    <tab each={card.extra_pages} title={ title }>
+    <tab each={ parent.card.extra_pages } title={ title }>
       <raw class='body' content={ body }></raw>
     </tab>
   </tabs>
