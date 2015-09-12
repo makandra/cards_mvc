@@ -11,6 +11,12 @@
 
 @app.apiClient = new $.RestClient('/api/')
 
+
+@app.setCsrfToken = (token) ->
+  $.ajaxSetup
+    headers:
+      'X-CSRF-Token': token
+
 $ =>
   riot.mount('outlet', router: @app.router)
   riot.mount('navigation', router: @app.router)

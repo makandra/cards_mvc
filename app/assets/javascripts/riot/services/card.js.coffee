@@ -15,3 +15,15 @@ class @app.Card
   @find: (id) ->
     client.read(id).then (data) ->
       new Card(data.card)
+
+  save: ->
+    client.update(@id, card: @attributes())
+      .then (data) =>
+        _.extend(@, data.card)
+        @
+      , (error) =>
+        error.responseJSON.errors
+
+
+  attributes: ->
+    _.extend({}, @)

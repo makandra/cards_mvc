@@ -7,3 +7,5 @@
     %outlet
 
   = javascript_include_tag 'riot/app'
+  :coffee
+    @app.setCsrfToken(#{form_authenticity_token.to_json})

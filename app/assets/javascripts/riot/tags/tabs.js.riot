@@ -17,7 +17,7 @@
         @tabs.push(tab)
       updateNavigation()
 
-    @unregisterTabs = (tab) =>
+    @unregisterTab = (tab) =>
       index = @tabs.indexOf(tab)
       if index >= 0
         @tabs[index..index] == []
@@ -28,7 +28,7 @@
         $root = $(@root)
         @tabs = _.sortBy @tabs, (tab) =>
           $root.find('tab').index(tab.root)
-        @tags['tab-navigation'].update(tabs: @tabs)
+        @tags['tab-navigation']?.update(tabs: @tabs)
 
     @activate = (event) =>
       for tab in @tabs

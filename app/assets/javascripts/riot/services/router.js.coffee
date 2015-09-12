@@ -10,6 +10,8 @@ routes = (collection, id, action) ->
       ['cards-index']
     when 'cards/:id'
       ['card', id: id]
+    when 'cards/:id/edit'
+      ['card-form', id: id]
     when 'about'
       ['about']
 

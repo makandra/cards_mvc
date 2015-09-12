@@ -5,6 +5,14 @@ class Card < ActiveRecord::Base
   validates :title, :body, presence: true
 
 
+  def extra_pages=(pages)
+    if pages.is_a?(Hash)
+      super(pages.values)
+    else
+      super(pages)
+    end
+  end
+
   def self.search(query)
     if query.blank?
       all
