@@ -10,6 +10,10 @@
 
     tabsTag.registerTab(@)
 
+    @activate = =>
+      @active = true
+      opts.onactivate?()
+
     @on 'unmount', =>
       tabsTag.unregisterTab(@)
 

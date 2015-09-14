@@ -1,0 +1,16 @@
+<tab-navigation>
+  <ul class="nav nav-tabs">
+    <li each={ tabs } class={ active: active }>
+      <a href onclick={ parent.activate }>{{ title }}</a>
+    </li>
+  </ul>
+
+
+  <script type="coffee">
+    @tabs = opts.tabs
+
+    @activate = (event) =>
+      @parent.activate(event.item)
+      false
+  </script>
+</tab-navigation>

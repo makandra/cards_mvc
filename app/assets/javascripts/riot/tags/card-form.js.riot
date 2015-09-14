@@ -1,0 +1,68 @@
+<card-form>
+  <form name='cardForm' onsubmit={ save }>
+    <div class={ 'has-error': errors.title, 'form-group': true }>
+      <label class='control-label'>
+        Title
+      </label>
+      <input class='form-control' name='formTitle' value={ card.title } type='text'>
+      <span class='text-danger'>
+        { errors.title }
+      </span>
+    </div>
+    <div class='form-group' errors-for='body'>
+      <tabs>
+        <tab title='1'>
+          <ckeditor name='body' ng-model='ctrl.card.body'></ckeditor>
+        </tab>
+        <tab each={ parent.card.extra_pages } title='{ title }'>
+          <!--ckeditor name='extraPage.title' ng-model='extraPage.body'></ckeditor-->
+          <a class='btn btn-warn' onclick={ parent.parent.removePage }>Remove page</a>
+        </tab>
+        <tab onactivate={ parent.addPage } title='+'></tab>
+      </tabs>
+    </div>
+    <button class='btn btn-primary' type='submit'>
+      { card.id ? "Update" : "Create" }
+    </button>
+    <button class='btn btn-danger' onclick={ destroy() } type='button'>
+      Delete
+    </button>
+  </form>
+
+  <script type="coffee">
+    app = window.app
+
+    @errors = {}
+
+    app.Card.find(opts.id).then (card) =>
+      updateCard(card)
+
+
+    @save = =>
+      @card.title = @formTitle.value
+      @card.save().then (card) =>
+        updateCard(card)
+
+
+    @addPage = =>
+      @card.extra_pages ?= []
+      @card.extra_pages.push
+        body: null
+        title: @card.extra_pages.length + 2
+      false
+
+    @removePage = (event) =>
+      index = @card.extra_pages.indexOf(event.item)
+      if index >= 0
+        @card.extra_pages[index..index] = []
+      console.log(@card.extra_pages)
+      false
+
+    updateCard = (card) =>
+      @card = card
+      if card.extra_pages
+        for page, index in card.extra_pages
+          page.title = "#{index + 2}"
+      @update()
+  </script>
+</card-form>

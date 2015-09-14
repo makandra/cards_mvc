@@ -32,7 +32,6 @@
 
   controller.removePage = (page) ->
     index = controller.card.extra_pages.indexOf(page)
-    console.log index
     if index >= 0
       controller.card.extra_pages[index..index] = []
 

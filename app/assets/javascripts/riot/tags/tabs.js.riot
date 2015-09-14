@@ -20,7 +20,7 @@
     @unregisterTab = (tab) =>
       index = @tabs.indexOf(tab)
       if index >= 0
-        @tabs[index..index] == []
+        @tabs[index..index] = []
       updateNavigation()
 
     updateNavigation = =>
@@ -30,10 +30,10 @@
           $root.find('tab').index(tab.root)
         @tags['tab-navigation']?.update(tabs: @tabs)
 
-    @activate = (event) =>
+    @activate = (activatedTab) =>
       for tab in @tabs
         tab.active = false
-      event.item.active = true
+      activatedTab.activate()
       @update()
       false
 
