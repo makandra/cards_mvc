@@ -1,0 +1,9 @@
+{{#if multiplePages}}
+  <ul class="pagination">
+    {{#each pages as |page|}}
+      <li class={{if page.current 'active'}}>
+        <a href {{action 'goTo' page.number}}> {{page.label}} </a>
+      </li>
+    {{/each}}
+  </ul>
+{{/if}}

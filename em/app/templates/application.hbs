@@ -1,0 +1,62 @@
+<nav class='navbar navbar-inverse navbar-fixed-top'>
+  <div class='container'>
+    <div class='navbar-header'>
+      <a class='navbar-brand' href='#/'>Ember</a>
+    </div>
+    <div class='navbar-collapse'>
+      <ul class='nav navbar-nav'>
+        <li>
+          {{#link-to 'cards.index'}}Cards{{/link-to}}
+        </li>
+        <li>
+          {{#link-to 'about'}}About{{/link-to}}
+        </li>
+      </ul>
+      <ul class='nav navbar-nav navbar-right'>
+        <li class='dropdown'>
+          <a class='dropdown-toggle' data-toggle='dropdown' href>
+            Switch framework
+            <span class='caret'></span>
+          </a>
+          <ul class='dropdown-menu'>
+            <li>
+              <a href='/angular'>
+                Angular
+              </a>
+            </li>
+            <li>
+              <a href='/ember'>
+                Ember
+              </a>
+            </li>
+            <li>
+              <a href='/riot'>
+                Riot
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href ng-click='sessionCtrl.signIn()' ng-hide='sessionCtrl.signedIn'>
+            Sign in
+          </a>
+          <a href ng-click='sessionCtrl.signOut()' ng-show='sessionCtrl.signedIn'>
+            Sign out
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class='container' ng-controller='FlashesController as flashesCtrl'>
+  <div class='flashes'>
+    <div class='row' ng-repeat='flash in flashesCtrl.flashes'>
+      <div class='alert alert-{{flash.severity}}'>
+        {{ flash.message }}
+      </div>
+    </div>
+  </div>
+</div>
+<div class='container'>
+  {{outlet}}
+</div>

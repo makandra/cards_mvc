@@ -58,7 +58,7 @@ class Api::CardsController < ApplicationController
 
   def build_card
     @card ||= Card.new
-    @card.attributes = params[:card].permit(:title, :body, extra_pages: [:body])
+    @card.attributes = params.fetch(:card, {}).permit(:title, :body, extra_pages: [:body])
   end
 
   def require_sign_in

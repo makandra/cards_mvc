@@ -1,0 +1,33 @@
+<form name='cardForm' ng-submit='ctrl.save(cardForm)'>
+  <div class='form-group {{if card.errors.title 'has-error'}}'>
+    <label class='control-label'>
+      Title
+    </label>
+    {{input class='form-control' name='title' value=card.title type='text'}}
+    <span class='text-danger'>
+      {{ card.errors.title }}
+    </span>
+  </div>
+  <div class='form-group {{if card.errors.body 'has-error'}}'>
+    {{cm-ckeditor value=card.body}}
+    <span class='text-danger'>
+      {{ card.errors.body }}
+    </span>
+    <tabs>
+      <tab title='1'>
+        <ckeditor name='body' ng-model='ctrl.card.body'></ckeditor>
+      </tab>
+      <tab ng-repeat='extraPage in ctrl.card.extra_pages' title='$index + 2'>
+        <ckeditor name='extraPage.title' ng-model='extraPage.body'></ckeditor>
+        <a class='btn btn-warn' ng-click='ctrl.removePage(extraPage)'>Remove page</a>
+      </tab>
+      <tab ng-activate='ctrl.addPage()' title='+'></tab>
+    </tabs>
+  </div>
+  <button class='btn btn-primary' type='submit' {{action 'save'}}>
+    {{#if card.id}}Update{{else}}Create{{/if}}
+  </button>
+  <button class='btn btn-danger' type='button' {{action 'destroy'}}>
+    Delete
+  </button>
+</form>

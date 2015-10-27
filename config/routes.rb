@@ -14,6 +14,12 @@ Rails.application.routes.draw do
 
   end
 
+  namespace :ember do
+
+    root to: 'frontend#show'
+
+  end
+
   namespace :riot do
 
     root to: 'frontend#show'

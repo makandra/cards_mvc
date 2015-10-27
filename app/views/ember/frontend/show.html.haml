@@ -1,0 +1,6 @@
+%body
+  = javascript_include_tag '/assets/javascripts/ember/assets/vendor.js'
+  = javascript_include_tag '/assets/javascripts/ember/assets/em.js'
+
+  :javascript
+    require('em/set-csrf-token').default(#{form_authenticity_token.to_json});

@@ -1,0 +1,40 @@
+<div class='row'>
+  <h1>
+    <div class='pull-right' ng-show='sessionCtrl.signedIn'>
+      {{#link-to 'cards.new' class='btn btn-default'}}
+        New card
+      {{/link-to}}
+    </div>
+    Cards
+  </h1>
+</div>
+
+<p></p>
+
+<div class='row'>
+  <form>
+    <div class='form-group'>
+      {{input class='form-control' value=searchQuery placeholder='Search…' type='search'}}
+    </div>
+  </form>
+</div>
+
+<p></p>
+
+<div class='row'>
+  <table class='table'>
+    <tbody>
+      {{#each content as |card|}}
+        <tr>
+          <td>
+            <a ng-href='#/cards/{{ card.id }}'>{{ card.title }}</a>
+          </td>
+          <td class='text-right' ng-show='sessionCtrl.signedIn'>
+            {{#link-to 'cards.edit' card class='btn btn-default'}}Edit{{/link-to}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{cm-pagination goTo=(action 'goToPage') info=content.meta.pagination}}
+</div>
