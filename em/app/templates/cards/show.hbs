@@ -1,0 +1,11 @@
+<h1>
+  <div class='pull-right' ng-show='sessionCtrl.signedIn'>
+    {{#link-to 'cards.edit' content class='btn btn-default'}}Edit{{/link-to}}
+  </div>
+  {{ content.title }}
+</h1>
+<tabs>
+  <div class='body'>
+    {{{ content.body }}}
+  </div>
+</tabs>

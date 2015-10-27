@@ -27,7 +27,7 @@
       {{#each content as |card|}}
         <tr>
           <td>
-            <a ng-href='#/cards/{{ card.id }}'>{{ card.title }}</a>
+            {{#link-to 'cards.show' card}}{{card.title}}{{/link-to}}
           </td>
           <td class='text-right' ng-show='sessionCtrl.signedIn'>
             {{#link-to 'cards.edit' card class='btn btn-default'}}Edit{{/link-to}}
