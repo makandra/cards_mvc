@@ -20,6 +20,12 @@ Rails.application.routes.draw do
 
   end
 
+  namespace :react do
+
+    root to: 'frontend#show'
+
+  end
+
   namespace :riot do
 
     root to: 'frontend#show'
