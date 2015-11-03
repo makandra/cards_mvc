@@ -26,8 +26,13 @@
     }
 
     save() {
-      return client.update(this.id, { card: this.attributes() })
-        .then(data => {
+      if ( this.id ) {
+        var request = client.update(this.id, { card: this.attributes() });
+      } else {
+        var request = client.create({ card: this.attributes() });
+      }
+
+      return request.then(data => {
           Object.assign(this, data.card)
           return this;
         }, error => {
@@ -35,6 +40,14 @@
         });
     }
 
+    destroy() {
+      return new Promise((resolve) => {
+        client.destroy(this.id)
+          .always(() => {
+            resolve();
+          });
+      });
+    }
 
     attributes() {
       return Object.assign({}, this);

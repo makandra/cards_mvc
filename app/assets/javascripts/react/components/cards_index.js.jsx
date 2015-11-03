@@ -4,16 +4,16 @@
       function createCard(card) {
         return <tr key={card.id}>
           <td>
-            <a href={`#/cards/${card.id}`}>{card.title}</a>
+            <ReactRouter.Link to={`/cards/${card.id}`}>{card.title}</ReactRouter.Link>
           </td>
           <td className='text-right'>
-            <a className='btn btn-default' href='#/cards/{card.id}/edit'>Edit</a>
+            <ReactRouter.Link to={`cards/${card.id}/edit`} className='btn btn-default'>Edit</ReactRouter.Link>
           </td>
         </tr>
       }
 
       return <div>
-        <table className='table' ng-hide='ctrl.loading'>
+        <table className='table'>
           <tbody>
             { this.props.cards.map(createCard) }
           </tbody>
@@ -78,10 +78,10 @@
       return <div>
         <div className='row'>
           <h1>
-            <div className='pull-right' ng-show='sessionCtrl.signedIn'>
-              <a className='btn btn-default' ng-href='#/cards/new'>
+            <div className='pull-right'>
+              <ReactRouter.Link to='/cards/new' className='btn btn-default'>
                 New card
-              </a>
+              </ReactRouter.Link>
             </div>
             Cards
           </h1>

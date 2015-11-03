@@ -24,6 +24,5 @@ class @app.Card
       , (error) =>
         error.responseJSON.errors
 
-
   attributes: ->
     _.extend({}, @)

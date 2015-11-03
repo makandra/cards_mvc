@@ -1,24 +1,7 @@
-
-%body(ng-app='cards-mvc' ng-controller='SessionController as sessionCtrl')
-  %nav.navbar.navbar-inverse.navbar-fixed-top
-    .container
-      .navbar-header
-        %a.navbar-brand(href='#/') React
-      .navbar-collapse
-        %ul.nav.navbar-nav
-          %li
-            %a(href='#/cards')
-              Cards
-          %li
-            %a(href='#/about')
-              About
-        %ul.nav.navbar-nav.navbar-right
-          = render 'shared/switch_framework_dropdown'
-
-
-  .container
-    #app
+%body
+  #app
 
   = javascript_include_tag 'react/app'
   :javascript
+    setCsrfToken(#{form_authenticity_token.to_json});
     ReactDOM.render(React.createElement(App), document.getElementById('app'));
