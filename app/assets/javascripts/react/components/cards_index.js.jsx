@@ -7,7 +7,9 @@
             <ReactRouter.Link to={`/cards/${card.id}`}>{card.title}</ReactRouter.Link>
           </td>
           <td className='text-right'>
-            <ReactRouter.Link to={`cards/${card.id}/edit`} className='btn btn-default'>Edit</ReactRouter.Link>
+            <IfSignedIn>
+              <ReactRouter.Link to={`cards/${card.id}/edit`} className='btn btn-default'>Edit</ReactRouter.Link>
+            </IfSignedIn>
           </td>
         </tr>
       }
@@ -78,11 +80,13 @@
       return <div>
         <div className='row'>
           <h1>
-            <div className='pull-right'>
-              <ReactRouter.Link to='/cards/new' className='btn btn-default'>
-                New card
-              </ReactRouter.Link>
-            </div>
+            <IfSignedIn>
+              <div className='pull-right'>
+                <ReactRouter.Link to='/cards/new' className='btn btn-default'>
+                  New card
+                </ReactRouter.Link>
+              </div>
+            </IfSignedIn>
             Cards
           </h1>
         </div>

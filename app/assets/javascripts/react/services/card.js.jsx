@@ -1,6 +1,6 @@
 (function() {
   apiClient.add('cards')
-  client = apiClient.cards
+  let client = apiClient.cards
 
   window.Card = class Card {
     constructor(data) {

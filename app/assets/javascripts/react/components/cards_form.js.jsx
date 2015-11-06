@@ -97,24 +97,29 @@
       }
 
       if ( this.state.card ) {
-        return <form onSubmit={ handleSubmit }>
-          { this.renderTextField(this.state.card, 'title', { label: 'Titel' }) }
-          <div className='form-group' errors-for='body'>
-            <Tabs>
-              <Tabs.Tab title='1' >
-                { this.renderWysiwygField(this.state.card, 'body', {}) }
-              </Tabs.Tab>
-              { (this.state.card.extra_pages || []).map(renderExtraPage) }
-              <Tabs.Tab title='+' onClick={ handleAddPage }/>
-            </Tabs>
-          </div>
-          <button className='btn btn-primary' type='submit'>
-            { this.state.card.id ? "Update" : "Create" }
-          </button>
-          <button className='btn btn-danger' type='button' onClick={ handleDestroy }>
-            Delete
-          </button>
-        </form>;
+        return <div>
+          <h1>
+            { this.state.card.id ? 'Edit card' : 'New card' }
+          </h1>
+          <form onSubmit={ handleSubmit }>
+            { this.renderTextField(this.state.card, 'title', { label: 'Titel' }) }
+            <div className='form-group' errors-for='body'>
+              <Tabs>
+                <Tabs.Tab title='1' >
+                  { this.renderWysiwygField(this.state.card, 'body', {}) }
+                </Tabs.Tab>
+                { (this.state.card.extra_pages || []).map(renderExtraPage) }
+                <Tabs.Tab title='+' onClick={ handleAddPage }/>
+              </Tabs>
+            </div>
+            <button className='btn btn-primary' type='submit'>
+              { this.state.card.id ? "Update" : "Create" }
+            </button>
+            <button className='btn btn-danger' type='button' onClick={ handleDestroy }>
+              Delete
+            </button>
+          </form>
+        </div>;
       } else {
         return <div />;
       }

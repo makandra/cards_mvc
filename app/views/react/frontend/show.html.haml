@@ -3,5 +3,6 @@
 
   = javascript_include_tag 'react/app'
   :javascript
+    session.set(#{signed_in});
     setCsrfToken(#{form_authenticity_token.to_json});
     ReactDOM.render(React.createElement(App), document.getElementById('app'));

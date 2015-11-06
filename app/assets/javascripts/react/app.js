@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery.rest
 //= require rx.lite
+//= require rx.binding
 //= require react
 //= require react-router
 //= require_self

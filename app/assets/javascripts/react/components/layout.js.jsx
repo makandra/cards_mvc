@@ -46,9 +46,7 @@
                   </ul>
                 </li>
                 <li>
-                  <a href ng-click='sessionCtrl.signIn()' ng-hide='sessionCtrl.signedIn'>
-                    Sign in
-                  </a>
+                  <SignInOut />
                 </li>
               </ul>
             </div>
