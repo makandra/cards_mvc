@@ -23,10 +23,14 @@
 
     renderField(model, field, { label }, input) {
       var errors = this.state.errors;
-      return <div className= { `form-group ${errors[field] ? 'has-error' : null}` }>
-        <label className='control-label'>
+      var labelTag = null;
+      if ( label) {
+        labelTag = <label className='control-label'>
           { label }
-        </label>
+        </label>;
+      }
+      return <div className= { `form-group ${errors[field] ? 'has-error' : null}` }>
+        { labelTag }
         { input }
         <span className='text-danger'>
           { errors[field] ? errors[field][0] : null }
@@ -35,25 +39,25 @@
     },
 
     handleFieldChange(model, field, value) {
-      this.state[model][field] = value;
-      this.setState({ [model]: this.state[model] });
+      model[field] = value;
+      this.setState(this.state);
     },
 
     renderTextField(model, field, options) {
       return this.renderField(model, field, options,
-        <input className='form-control' name='title' value={ this.state[model][field] } onChange={ (event) => this.handleFieldChange(model, field, event.target.value) } type='text' />
+        <input className='form-control' name='title' value={ model[field] } onChange={ (event) => this.handleFieldChange(model, field, event.target.value) } type='text' />
       );
     },
 
     renderWysiwygField(model, field, options) {
       return this.renderField(model, field, options,
-        <CkEditor className='form-control' name='body' value={ this.state[model][field] } onChange={ (value) => this.handleFieldChange(model, field, value) } type='text' />
+        <CkEditor className='form-control' name='body' value={ model[field] } onChange={ (value) => this.handleFieldChange(model, field, value) } type='text' />
       );
     },
 
 
     render() {
-      handleSubmit = (event) => {
+      let handleSubmit = (event) => {
         event.preventDefault();
 
         this.state.card.save()
@@ -62,24 +66,47 @@
           }, (errors) => {
             this.setState({ errors: errors });
           });
-      }
+      };
 
-      handleDestroy = (event) => {
+      let handleDestroy = (event) => {
         this.state.card.destroy()
           .then(() => {
             this.props.history.pushState(null, '/cards');
           });
+      };
+
+      renderExtraPage = (page, index) => {
+        let handleRemovePage = (event) => {
+          event.preventDefault();
+          this.state.card.extra_pages.splice(index, 1);
+          this.setState({ card: this.state.card });
+        }
+
+        return <Tabs.Tab title={ index + 2 } key={ index }>
+          { this.renderWysiwygField(page, 'body', {}) }
+          <a href='' onClick={ handleRemovePage }>
+            Remove page
+          </a>
+        </Tabs.Tab>;
+      };
+
+      handleAddPage = () => {
+        this.state.card.extra_pages.push({ body: '' });
+        this.setState({ card: this.state.card });
+        return false;
       }
 
       if ( this.state.card ) {
-        return <form name='cardForm' onSubmit={ handleSubmit }>
-          { this.renderTextField('card', 'title', { label: 'Titel' }) }
+        return <form onSubmit={ handleSubmit }>
+          { this.renderTextField(this.state.card, 'title', { label: 'Titel' }) }
           <div className='form-group' errors-for='body'>
-            <tabs>
-              <tab title='1'>
-                { this.renderWysiwygField('card', 'body', { label: 'Body' }) }
-              </tab>
-            </tabs>
+            <Tabs>
+              <Tabs.Tab title='1' >
+                { this.renderWysiwygField(this.state.card, 'body', {}) }
+              </Tabs.Tab>
+              { (this.state.card.extra_pages || []).map(renderExtraPage) }
+              <Tabs.Tab title='+' onClick={ handleAddPage }/>
+            </Tabs>
           </div>
           <button className='btn btn-primary' type='submit'>
             { this.state.card.id ? "Update" : "Create" }

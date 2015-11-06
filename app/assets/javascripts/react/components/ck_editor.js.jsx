@@ -6,11 +6,12 @@
     },
 
     componentDidMount() {
-      var node = ReactDOM.findDOMNode(this);
-      editor = CKEDITOR.replace(node);
+      let node = ReactDOM.findDOMNode(this);
+      let editor = CKEDITOR.replace(node);
       this.editorReady = new Rx.AsyncSubject();
 
       editor.setData(this.props.value, () => {
+        this.editorValue = this.props.value;
         this.editorReady.onNext(editor);
         this.editorReady.onCompleted();
       });
@@ -26,7 +27,7 @@
 
     componentWillReceiveProps(newProps) {
       this.editorReady.subscribe(editor => {
-        var newValue = newProps.value;
+        let newValue = newProps.value;
         if ( newValue != this.editorValue ) {
           this.editorValue = newValue;
           editor.setData(newValue);
