@@ -1,11 +1,7 @@
 (function() {
 
   window.IfSignedIn = React.createClass({
-    getInitialState() {
-      return {};
-    },
-
-    componentDidMount() {
+    componentWillMount() {
       this.signInStateSubscription = session.signInState.subscribe(signedIn => {
         this.setState( { signedIn });
       });

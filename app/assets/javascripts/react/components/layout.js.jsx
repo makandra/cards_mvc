@@ -6,7 +6,7 @@
         <nav className='navbar navbar-inverse navbar-fixed-top'>
           <div className='container'>
             <div className='navbar-header'>
-              <a className='navbar-brand' href='#/'>Ember</a>
+              <a className='navbar-brand' href='#/'>React</a>
             </div>
             <div className='navbar-collapse'>
               <ul className='nav navbar-nav'> <li>
@@ -52,6 +52,9 @@
             </div>
           </div>
         </nav>
+        <div className='container'>
+          <Flashes />
+        </div>
         <div className='container'>
           { this.props.children }
         </div>

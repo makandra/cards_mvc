@@ -23,11 +23,13 @@
       if ( this.state.card ) {
         return <div>
           <h1>
-            <div className='pull-right'>
-              <ReactRouter.Link to={`/cards/${this.state.card.id}/edit`} className='btn btn-default'>
-                Edit
-              </ReactRouter.Link>
-            </div>
+            <IfSignedIn>
+              <div className='pull-right'>
+                <ReactRouter.Link to={`/cards/${this.state.card.id}/edit`} className='btn btn-default'>
+                  Edit
+                </ReactRouter.Link>
+              </div>
+            </IfSignedIn>
             { this.state.card.title }
           </h1>
           <Tabs>

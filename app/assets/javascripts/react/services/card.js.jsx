@@ -4,7 +4,8 @@
 
   window.Card = class Card {
     constructor(data) {
-      $.extend(this, data)
+      this.extra_pages = [];
+      $.extend(this, data);
     }
 
     static search(params) {
@@ -34,6 +35,7 @@
 
       return request.then(data => {
           Object.assign(this, data.card)
+          flash.success(this.id ? 'Card updated' : 'Card created');
           return this;
         }, error => {
           return error.responseJSON.errors;
@@ -44,6 +46,7 @@
       return new Promise((resolve) => {
         client.destroy(this.id)
           .always(() => {
+            flash.success('Card deleted');
             resolve();
           });
       });

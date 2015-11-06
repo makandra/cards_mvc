@@ -8,6 +8,7 @@
       $.post('/api/session')
         .then(() => {
           this.signInState.onNext(true);
+          flash.success('Signed in');
         });
     }
 
@@ -18,6 +19,7 @@
       })
         .then(() => {
           this.signInState.onNext(false);
+          flash.success('Signed out');
         });
     }
 
