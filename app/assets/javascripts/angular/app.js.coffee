@@ -10,26 +10,26 @@
 #= require_tree ./filters
 
 
-@CardsMvc = angular.module('cards-mvc', ['ngRoute', 'restmod'])
+@app = angular.module('cards-mvc', ['ngRoute', 'restmod'])
 
-@CardsMvc.config ['$routeProvider', ($routeProvider) ->
+@app.config ['$routeProvider', ($routeProvider) ->
   $routeProvider
     .when '/cards',
       templateUrl: 'angular/cards/index.html'
-      controller: 'CardsIndexController'
+      controller: 'Cards::IndexController'
       controllerAs: 'ctrl'
       reloadOnSearch: false
     .when '/cards/new',
       templateUrl: 'angular/cards/new.html'
-      controller: 'CardsFormController'
+      controller: 'Cards::FormController'
       controllerAs: 'ctrl'
     .when '/cards/:id',
       templateUrl: 'angular/cards/show.html'
-      controller: 'CardsShowController'
+      controller: 'Cards::ShowController'
       controllerAs: 'ctrl'
     .when '/cards/:id/edit',
       templateUrl: 'angular/cards/edit.html'
-      controller: 'CardsFormController'
+      controller: 'Cards::FormController'
       controllerAs: 'ctrl'
     .when '/about',
       templateUrl: 'shared/about.html'
@@ -38,13 +38,13 @@
 
 ]
 
-@CardsMvc.config ['$httpProvider', ($httpProvider) ->
+@app.config ['$httpProvider', ($httpProvider) ->
   angular.extend $httpProvider.defaults,
     xsrfCookieName: 'CSRF-TOKEN'
     xsrfHeaderName: 'X-CSRF-Token'
 ]
 
-@CardsMvc.config ['restmodProvider', (restmodProvider) ->
+@app.config ['restmodProvider', (restmodProvider) ->
   restmodProvider.rebase('DefaultPacker')
   restmodProvider.rebase
     $config:

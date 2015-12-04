@@ -31,5 +31,5 @@
 
   = javascript_include_tag 'angular/app'
   :coffee
-    @CardsMvc.run (Session) ->
+    @app.run (Session) ->
       Session.set(#{signed_in})

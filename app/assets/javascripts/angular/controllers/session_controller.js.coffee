@@ -1,19 +1,20 @@
-@CardsMvc.controller 'SessionController', [ '$location', 'Flash', 'Session', ($location, Flash, Session) ->
+@app.controller 'SessionController', [ '$location', 'Flash', 'Session', ($location, Flash, Session) ->
 
-  controller = {}
+  init = =>
+    Session.watch =>
+      @signedIn = Session.signedIn
 
-  Session.watch ->
-    controller.signedIn = Session.signedIn
 
-  controller.signIn = ->
+  @signIn = ->
     Session.signIn().then ->
       Flash.success('Signed in')
 
-  controller.signOut = ->
+  @signOut = ->
     Session.signOut().then ->
       $location.path('/cards')
       Flash.success('Signed out')
 
-  controller
 
+  init()
+  return
 ]

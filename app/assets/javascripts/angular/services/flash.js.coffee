@@ -1,23 +1,21 @@
-@CardsMvc.factory 'Flash', [ '$timeout', ($timeout) ->
+@app.service 'Flash', [ '$timeout', ($timeout) ->
 
-  class Flash
-    flashes: []
+  @flashes = []
 
-    _push: (severity, message) ->
-      @flashes.push
-        severity: severity
-        message: message
-      $timeout =>
-        @flashes[0..1] = []
-      , 2000
+  @success = (message) ->
+    push('success', message)
 
-    success: (message) ->
-      @_push('success', message)
-
-    warn: (message) ->
-      @_push('warn', message)
+  @warn = (message) ->
+    push('warn', message)
 
 
-  new Flash
+  push = (severity, message) =>
+    @flashes.push
+      severity: severity
+      message: message
+    $timeout =>
+      @flashes[0..1] = []
+    , 2000
 
+  return
 ]

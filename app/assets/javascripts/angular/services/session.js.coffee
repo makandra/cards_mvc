@@ -1,28 +1,29 @@
-@CardsMvc.factory 'Session', [ '$http', ($http) ->
+@app.service 'Session', [ '$http', ($http) ->
 
-  class Session
-    _callbacks: []
+  callbacks = []
 
-    signedIn: false
+  @signedIn = false
 
-    signIn: ->
-      $http.post('/api/session').then =>
-        @set(true)
 
-    signOut: ->
-      $http.delete('/api/session').then =>
-        @set(false)
+  @signIn = =>
+    $http.post('/api/session').then =>
+      @set(true)
 
-    watch: (callback) ->
-      @_callbacks.push(callback)
+  @signOut = =>
+    $http.delete('/api/session').then =>
+      @set(false)
+
+  @watch = (callback) ->
+    callbacks.push(callback)
+    callback()
+
+
+  @set = (signedIn) =>
+    @signedIn = signedIn
+    for callback in callbacks
       callback()
 
-    set: (signedIn) ->
-      @signedIn = signedIn
-      for callback in @_callbacks
-        callback()
-
-  new Session
+  return
 ]
 
-@CardsMvc.run (Session) -> Session.set(false)
+@app.run (Session) -> Session.set(false)

@@ -1,6 +1,6 @@
-@CardsMvc.factory 'Card', ['restmod', '$q', (restmod, $q) ->
+@app.factory 'Card', ['restmod', '$q', (restmod, $q) ->
 
-  Card = restmod.model('/api/cards').mix
+  restmod.model('/api/cards').mix
     $extend:
       Record:
         saveForm: (form) ->
@@ -29,7 +29,4 @@
          , (response) ->
            setErrors(response.$response.data.errors)
            $q.reject(response)
-
-
-  Card
 ]

@@ -1,5 +1,6 @@
-@CardsMvc.controller 'FlashesController', [ 'Flash', (Flash) ->
+@app.controller 'FlashesController', [ 'Flash', (Flash) ->
 
-  flashes: Flash.flashes
+  @flashes = Flash.flashes
 
+  return
 ]

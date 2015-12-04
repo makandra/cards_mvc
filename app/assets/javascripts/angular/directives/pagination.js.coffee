@@ -1,4 +1,4 @@
-@CardsMvc.directive 'pagination', [ ->
+@app.directive 'pagination', [ ->
 
   maxWindowSize = 5
   maxOffset = (maxWindowSize - 1) / 2 # the maximum distance to the current page we will show
