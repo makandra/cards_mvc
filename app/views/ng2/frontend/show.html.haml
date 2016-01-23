@@ -1,0 +1,12 @@
+%body
+  - if Rails.env.development?
+    = show_last_error
+
+  %cmvc-app
+    Loading…
+
+  - if Rails.env.development?
+    = javascript_include_tag '/ng2/vendor'
+    = javascript_include_tag '/ng2/app'
+  - else
+    = javascript_include_tag javascript_rev_for('ng2', 'bundle_production.js')

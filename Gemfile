@@ -43,6 +43,7 @@ group :development do
   gem 'guard-livereload'
   gem 'rack-livereload'
   gem 'better_errors'
+  gem 'ansi-to-html'
 end
 
 group :development, :test do

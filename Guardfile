@@ -22,4 +22,6 @@ guard 'livereload' do
   # Rails Assets Pipeline
   watch(%r{^(app|vendor)(/assets/\w+/(.+\.(css|js|html|png|jpg))).*}) { |m| "/assets/#{m[3]}" }
   watch(%r{^public/assets/javascripts/ember/index.html})
+  watch(%r{public/ng2/.+\.js})
+  watch(%r{public/ng2/last_error.txt})
 end

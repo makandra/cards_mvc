@@ -32,9 +32,15 @@ Rails.application.routes.draw do
 
   end
 
+  namespace :ng2 do
+
+    root to: 'frontend#show'
+
+  end
+
   root to: redirect('/angular')
 
-  get ':directory/*path', to: 'templates#show', directory: /angular|riot|shared/
+  get ':directory/*path', to: 'templates#show', directory: /angular|ng2|riot|shared/
 
 
 end
