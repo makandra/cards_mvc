@@ -1,0 +1,12 @@
+%div{'*ngIf' => 'card'}
+  %h1
+    .pull-right(ng-show='sessionCtrl.signedIn')
+      %a.btn.btn-default{'[routerLink]' => "['../Edit', {id: card.id}]"}
+        Edit
+    {{ card.title }}
+
+  %tabs
+    %tab{'[title]' => '"1"'}
+      .body{'[innerHTML]' => 'card.body'}
+    %tab{'*ngFor' => '#page of card.extra_pages; #index = index', '[title]' => 'index + 2'}
+      .body{'[innerHTML]' => 'page.body'}

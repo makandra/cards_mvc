@@ -1,4 +1,5 @@
 import {Component, EventEmitter} from 'angular2/core';
+import {RouterLink} from 'angular2/router';
 import {CardService} from './service.js';
 import {PaginationComponent} from '../pagination.component.js';
 import {Subject} from 'rxjs/Rx.js';
@@ -6,7 +7,7 @@ import {Subject} from 'rxjs/Rx.js';
 @Component({
   templateUrl: '/ng2/cards/index.html',
   providers: [CardService],
-  directives: [PaginationComponent],
+  directives: [PaginationComponent, RouterLink],
 })
 export class CardsIndexComponent {
   constructor(cardService: CardService) {

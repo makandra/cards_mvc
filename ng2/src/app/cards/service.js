@@ -24,4 +24,12 @@ export class CardService {
         return cards;
       });
   }
+
+  one(id) {
+    return this._http.get(`/api/cards/${id}`)
+      .map(response => {
+        let json = response.json();
+        return new Card(json.card)
+      });
+  }
 }
