@@ -1,0 +1,21 @@
+%div{'*ngIf' => 'card'}
+  %h1
+    Edit card
+
+  %form{'(ngSubmit)' => 'save()'}
+    .form-group(errors-for='title')
+      %label.control-label
+        Title
+      %input.form-control{'type' => 'text', 'name' => 'title', '[(ngModel)]' => 'card.title'}
+
+    .form-group(errors-for='body')
+      %tabs
+        %tab{'[title]' => '"1"'}
+          %textarea{'name' => 'body', '[(ngModel)]' => 'card.body'}
+        %tab{'*ngFor' => '#page of card.extra_pages; #index = index', '[title]' => 'index + 2'}
+          %textarea{'name' => 'extraPage.title', '[(ngModel)]' => 'page.body'}
+          %a.btn.btn-warn{'(click)' => 'removePage(page)'} Remove page
+        %tab{'[title]' => '"+"', '(activate)' => 'addPage($event)'}
+
+    %button.btn.btn-primary(type='submit')
+      {{ card.id ? "Update" : "Create" }}

@@ -1,6 +1,6 @@
 %div{'*ngIf' => 'card'}
   %h1
-    .pull-right(ng-show='sessionCtrl.signedIn')
+    .pull-right
       %a.btn.btn-default{'[routerLink]' => "['../Edit', {id: card.id}]"}
         Edit
     {{ card.title }}

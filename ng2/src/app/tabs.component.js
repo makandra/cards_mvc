@@ -1,4 +1,11 @@
-import {Component, QueryMetadata, QueryList} from 'angular2/core';
+import {Component, QueryMetadata, QueryList, EventEmitter} from 'angular2/core';
+
+
+class CancelableEvent {
+  preventDefault() {
+    this.prevented = true;
+  }
+}
 
 
 @Component({
@@ -8,9 +15,27 @@ import {Component, QueryMetadata, QueryList} from 'angular2/core';
       <ng-content></ng-content>
     </div>
   `,
-  inputs: ['title']
+  inputs: ['title'],
+  events: ['activate']
 })
 class TabComponent {
+  constructor() {
+    this.active = false;
+    this.activate = new EventEmitter(false);
+  }
+
+  setActive() {
+    event = new CancelableEvent();
+    this.activate.emit(event);
+    if ( !event.prevented ) {
+      this.active = true;
+    }
+    return this.active;
+  }
+
+  setInactive() {
+    this.active = false;
+  }
 }
 
 
@@ -38,19 +63,22 @@ class TabsComponent {
     tabs.changes.subscribe(() => {
       let anyActive = false;
       for (let tab of tabs) {
-        anyActive = anyActive && tab.active;
+        anyActive = anyActive || tab.active;
       }
       if (!anyActive && tabs.length > 0) {
-        tabs.first.active = true;
+        tabs.first.setActive();
       }
     });
   }
 
   activate(tab) {
-    for (let tab of this.tabs) {
-      tab.active = false;
+    if ( tab.setActive() ) {
+      for (let otherTab of this.tabs) {
+        if ( otherTab != tab ) {
+          otherTab.setInactive();
+        }
+      }
     }
-    tab.active = true;
     return false;
   }
 }

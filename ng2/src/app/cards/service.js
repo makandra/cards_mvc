@@ -32,4 +32,12 @@ export class CardService {
         return new Card(json.card)
       });
   }
+
+  save(card) {
+    return this._http.patch(`/api/cards/${card.id}`, JSON.stringify(card))
+      .map(response => {
+        let json = response.json();
+        return new Card(json.card)
+      });
+  }
 }
