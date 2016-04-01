@@ -33,11 +33,23 @@ export class CardService {
       });
   }
 
-  save(card) {
-    return this._http.patch(`/api/cards/${card.id}`, JSON.stringify(card))
+  save(card, controls) {
+    return this._http.patch(`/api/cards/${card.id}`, JSON.stringify({ card: card }))
       .map(response => {
         let json = response.json();
         return new Card(json.card)
+      })
+      .do(() => {}, response => {
+        let errors = response.json().errors;
+        if ( errors ) {
+          for ( let key in errors ) {
+            let control = controls[key];
+            if ( control ) {
+              control.setErrors({ remote: errors[key] });
+              console.log(control, key, errors[key])
+            }
+          }
+        }
       });
   }
 }

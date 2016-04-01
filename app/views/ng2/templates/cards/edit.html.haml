@@ -2,16 +2,16 @@
   %h1
     Edit card
 
-  %form{'(ngSubmit)' => 'save()'}
-    .form-group(errors-for='title')
+  %form{'(ngSubmit)' => 'save(form)', '#form' => 'ngForm'}
+    .form-group{'errorsFor' => 'title'}
       %label.control-label
         Title
-      %input.form-control{'type' => 'text', 'name' => 'title', '[(ngModel)]' => 'card.title'}
+      %input.form-control{'type' => 'text', '[(ngModel)]' => 'card.title', 'ngControl' => 'title'}
 
-    .form-group(errors-for='body')
+    .form-group{'errorsFor' => 'body'}
       %tabs
         %tab{'[title]' => '"1"'}
-          %textarea{'name' => 'body', '[(ngModel)]' => 'card.body'}
+          %textarea{'[(ngModel)]' => 'card.body', 'ngControl' => 'body'}
         %tab{'*ngFor' => '#page of card.extra_pages; #index = index', '[title]' => 'index + 2'}
           %textarea{'name' => 'extraPage.title', '[(ngModel)]' => 'page.body'}
           %a.btn.btn-warn{'(click)' => 'removePage(page)'} Remove page

@@ -1,15 +1,18 @@
 import {Component} from 'angular2/core';
-import {RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
+import {FORM_DIRECTIVES} from 'angular2/common';
+import {Router, RouteParams, ROUTER_DIRECTIVES} from 'angular2/router';
 import {CardService} from './service.js';
 import {TAB_DIRECTIVES} from '../tabs.component.js';
+import {ErrorsForComponent} from '../errors-for.component.js'
 
 @Component({
   templateUrl: '/ng2/cards/edit.html',
   providers: [CardService],
-  directives: [...TAB_DIRECTIVES, ...ROUTER_DIRECTIVES]
+  directives: [ErrorsForComponent, ...TAB_DIRECTIVES, ...ROUTER_DIRECTIVES, ...FORM_DIRECTIVES]
 })
 export class CardEditComponent {
-  constructor(routeParams: RouteParams, cardService: CardService) {
+  constructor(routeParams: RouteParams, router: Router, cardService: CardService) {
+    this._router = router;
     this._cardService = cardService;
     this._params = routeParams.params;
   }
@@ -33,6 +36,10 @@ export class CardEditComponent {
   }
 
   save(form) {
-    this._cardService.save(this.card);
+    this._cardService.save(this.card, form.controls).subscribe(() => {
+      this._router.navigate(['Index']);
+    }, () => {
+      // do nothing on error
+    });
   }
 }
