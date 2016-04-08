@@ -10,7 +10,7 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-Rails.application.config.assets.precompile += %w( shared.js angular/app.js riot/app.js react/app.js )
+Rails.application.config.assets.precompile += %w( shared.js angular/app.js riot/app.js react/app.js vue/app.js)
 
 
 Rails.application.assets.register_engine '.riot', Sprockets::RiotTemplate

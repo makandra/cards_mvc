@@ -1,0 +1,9 @@
+%body
+  %app
+
+  = cache('vue-templates') do
+    = embed_templates('vue', 'templates')
+    = embed_templates('shared', 'templates')
+
+  = javascript_include_tag 'vue/app'
+  = javascript_include_tag '/assets/javascripts/vue/build'

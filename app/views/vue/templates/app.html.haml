@@ -1,0 +1,29 @@
+%nav.navbar.navbar-inverse.navbar-fixed-top
+  .container
+    .navbar-header
+      %a.navbar-brand(href='#/') Vue.js
+    .navbar-collapse
+      %ul.nav.navbar-nav
+        %li
+          %a(v-link='{ path: "/cards"}')
+            Cards
+        %li
+          %a(v-link='{ path: "/about"}')
+            About
+      %ul.nav.navbar-nav.navbar-right
+        = render 'shared/switch_framework_dropdown'
+        -#%li TODO
+          %a(href ng-click='sessionCtrl.signIn()' ng-hide='sessionCtrl.signedIn')
+            Sign in
+          %a(href ng-click='sessionCtrl.signOut()' ng-show='sessionCtrl.signedIn')
+            Sign out
+
+.container
+  .flashes
+    -#.row(ng-repeat='flash in flashesCtrl.flashes') TODO
+      .alert(class='alert-{{flash.severity}}')
+        {{ flash.message }}
+
+
+.container
+  %router-view
