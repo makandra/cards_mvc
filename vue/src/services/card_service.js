@@ -4,6 +4,12 @@ apiClient.add('cards')
 
 let client = apiClient.cards;
 
+function normalizePromise(thenable) {
+  return new Promise((resolve, reject) => {
+    thenable.then(resolve, reject);
+  });
+}
+
 export default class Card {
   constructor(data) {
     this.extra_pages = [];
@@ -11,7 +17,7 @@ export default class Card {
   }
 
   static search(params) {
-    return client.read(params)
+    return normalizePromise(client.read(params))
       .then(data => {
         let cards = data.cards.map(card => {
           return new Card(card);
@@ -22,7 +28,7 @@ export default class Card {
   }
 
   static find(id) {
-    return client.read(id)
+    return normalizePromise(client.read(id))
       .then(data => {
         return new Card(data.card);
       });
@@ -35,7 +41,7 @@ export default class Card {
       var request = client.create({ card: this.attributes() });
     }
 
-    return request.then(data => {
+    return normalizePromise(request).then(data => {
         Object.assign(this, data.card)
         flash.success(this.id ? 'Card updated' : 'Card created');
         return this;

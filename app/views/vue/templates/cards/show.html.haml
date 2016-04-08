@@ -1,0 +1,13 @@
+%h1
+  -#TODO .pull-right(ng-show='sessionCtrl.signedIn')
+    %a.btn.btn-default(ng-href='#/cards/{{ctrl.card.id}}/edit')
+      Edit
+  {{ card.title }}
+
+%tabs
+  %tab(title='1')
+    .body
+      {{{ card.body }}}
+  %tab(v-for='page in card.extra_pages' v-bind:title='$index + 2')
+    .body
+      {{{ page.body }}}

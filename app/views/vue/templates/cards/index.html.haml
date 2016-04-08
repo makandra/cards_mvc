@@ -23,7 +23,7 @@
   %table.table(v-show='!loading')
     %tr(v-for='card in cards')
       %td
-        %a(v-link='{ path: "#/cards/" + card.id }') {{ card.title }}
+        %a(v-link='{ path: "/cards/" + card.id }') {{ card.title }}
       -# TODO %td.text-right(ng-show='sessionCtrl.signedIn')
         %a.btn.btn-default(ng-href='#/cards/{{ card.id }}/edit') Edit
 

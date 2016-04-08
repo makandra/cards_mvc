@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Cards from './Cards.js'
 import CardsIndex from './cards/Index.js'
+import CardsShow from './cards/Show.js'
 
 Vue.use(VueRouter)
 
@@ -15,7 +16,10 @@ router.map({
     subRoutes: {
       '/': {
         component: CardsIndex
-      }
+      },
+      '/:card_id': {
+        component: CardsShow
+      },
     }
   },
   '/about': {
