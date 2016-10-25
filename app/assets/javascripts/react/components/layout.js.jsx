@@ -43,6 +43,16 @@
                         React
                       </a>
                     </li>
+                    <li>
+                      <a href='/ng2'>
+                        Angular 2
+                      </a>
+                    </li>
+                    <li>
+                      <a href='/vue'>
+                        Vue
+                      </a>
+                    </li>
                   </ul>
                 </li>
                 <li>
