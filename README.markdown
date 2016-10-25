@@ -1,4 +1,5 @@
-== CardsMVC
+CardsMVC
+=======
 
 Sample project to evaluate different JavaScript frameworks in the spirit of [TodoMVC](http://todomvc.com/).
 
